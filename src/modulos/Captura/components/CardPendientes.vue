@@ -1,8 +1,12 @@
 <template>
   <q-card class="no-shadow" bordered>
-    <q-card-section class="q-pt-none text-center my-card" v-q-clickable>
+    <q-card-section
+      class="q-pt-none text-center my-card"
+      v-q-clickable
+      @click="selectCasillas(seccionId, tipoId)"
+    >
       <div class="text-h6 text-grey-8">
-        {{ nombre }}
+        {{ seccion }}
       </div>
       <div class="text-caption text-grey-8">
         {{ tipo }}
@@ -12,12 +16,34 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
 import { defineProps } from "vue";
+import { useQuasar } from "quasar";
 
+const router = useRouter();
+const $q = useQuasar();
 const props = defineProps({
-  nombre: String,
+  seccion: String,
   tipo: String,
+  seccionId: Number,
+  tipoId: Number,
 });
+
+const selectCasillas = async (seccionIdP, tipoIdP) => {
+  let tipoElecion = router.currentRoute.value.query.eleccion;
+  let municipioRouter = router.currentRoute.value.query.municipio;
+  $q.loading.show();
+  router.push({
+    path: "/Boleta",
+    query: {
+      seccion: seccionIdP,
+      casilla: tipoIdP,
+      eleccion: tipoElecion,
+      municipio: municipioRouter,
+    },
+  });
+  $q.loading.hide();
+};
 </script>
 <style>
 .my-card {

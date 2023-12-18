@@ -75,7 +75,19 @@ import { useRouter } from "vue-router";
 const $q = useQuasar();
 const administradorStore = useAdministrador();
 const { listaMunicipio } = storeToRefs(administradorStore);
-const lik = ref("../../../assets/PAN.png");
+const ListaPartidos = [
+  { logo: require("../../../assets/01-PAN.png"), nombre: "PAN" },
+  { logo: require("../../../assets/02-PRI.png"), nombre: "PRI" },
+  { logo: require("../../../assets/03-PRD.png"), nombre: "PRD" },
+  { logo: require("../../../assets/04-PT.png"), nombre: "PT" },
+  { logo: require("../../../assets/05-PVEM.png"), nombre: "PVEM" },
+  { logo: require("../../../assets/06-MC.png"), nombre: "MC" },
+  { logo: require("../../../assets/07-MORENA.png"), nombre: "MORENA" },
+  { logo: require("../../../assets/08-NAN.png"), nombre: "NAN" },
+  { logo: require("../../../assets/09-MLN.png"), nombre: "MLN" },
+  { logo: require("../../../assets/10-FXMN.png"), nombre: "FXMN" },
+  { logo: require("../../../assets/11-RSPN.png"), nombre: "RSPN" },
+];
 const router = useRouter();
 
 const SelectMunicipio = async (id) => {

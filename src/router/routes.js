@@ -27,6 +27,11 @@ const routes = [
         name: "Captura",
         component: () => import("src/modulos/Captura/pages/IndexPage.vue"),
       },
+      {
+        path: "/Boleta",
+        name: "Boleta",
+        component: () => import("src/modulos/Captura/pages/CapturaPage.vue"),
+      },
     ],
   },
 

@@ -7,7 +7,11 @@
     <q-card-section class="q-pa-none">
       <q-table
         grid
-        :rows="listaSecciones.filter((x) => x.capturada == false)"
+        :rows="
+          isCapturaVotos == true
+            ? listaSecciones.filter((x) => x.capturada == false)
+            : listaSecciones.filter((x) => x.complementariaCaptura == false)
+        "
         :columns="columns"
         hide-pagination
         :filter="filter"
@@ -30,8 +34,10 @@
         <template v-slot:item="props">
           <div class="q-pa-xs col-xs-4 col-sm-3 col-md-2 col-lg-1">
             <CardPendientes
-              :nombre="props.row.nombre"
+              :seccion="props.row.seccion"
               :tipo="props.row.tipo"
+              :seccionId="props.row.seccionId"
+              :tipoId="props.row.tipoId"
             ></CardPendientes>
             <!--<card-profile :avatar="props.row.avatar" :name="props.row.name" :des="props.row.des"></card-profile>-->
           </div>
@@ -49,7 +55,7 @@ import { useQuasar } from "quasar";
 
 const $q = useQuasar();
 const capturaStore = useCaptura();
-const { listaSecciones } = storeToRefs(capturaStore);
+const { listaSecciones, isCapturaVotos } = storeToRefs(capturaStore);
 const filter = ref();
 onBeforeMount(() => {
   // cargarDatos();
